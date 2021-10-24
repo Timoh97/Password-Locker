@@ -47,13 +47,13 @@ class Credentials:
 
         Credentials.credentials_list.append(self)
 
-    # def delete_credentials(self, username):
-    #     '''
-    #         allows user to delete  credentials from credentials_list
-    #         '''
+    def delete_credentials(self, username):
+        '''
+            allows user to delete  credentials from credentials_list
+            '''
 
-    #     self.credentials_list = [
-    #         x for x in self.credentials_list if x["username"] != username]
+        self.credentials_list = [
+            x for x in self.credentials_list if x["username"] != username]
 
     def display_credential(self):
         '''
@@ -61,15 +61,15 @@ class Credentials:
         '''
         return self.credentials_list
 
-    # @classmethod
-    # def get_for_aSocial_site(cls, social_site):
-    #     '''
-    #         gets credentials for a given social site and returns them
-    #         '''
+    @classmethod
+    def get_for_aSocial_site(cls, social_site):
+        '''
+            gets credentials for a given social site and returns them
+            '''
 
-    #     for credential in cls.credentials_list:
-    #         if credential in credential.social_site == social_site:
-    #             return credential
+        for credential in cls.credentials_list:
+            if credential in credential.social_site == social_site:
+                return credential
 
     @classmethod
     def pyperclip_copy(cls, social_site):

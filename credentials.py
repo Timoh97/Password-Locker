@@ -77,7 +77,7 @@ class Credentials:
         get_credentials = Credentials.get_for_aSocial_site(social_site)
         return pyperclip.copy(get_credentials)
 
-    def view_account(self, name):
-        for account in self.credentials_list:
-            if account['name'] == name:
-                return account
+    # def view_account(self, name):
+    #     for account in self.credentials_list:
+    #         if account['name'] == name:
+    #             return account

@@ -61,21 +61,21 @@ class Credentials:
         '''
         return self.credentials_list
 
-    @classmethod
-    def get_for_aSocial_site(cls, social_site):
-        '''
-            gets credentials for a given social site and returns them
-            '''
-
-        for credential in cls.credentials_list:
-            if credential in credential.social_site == social_site:
-                return credential
-
     # @classmethod
-    # def pyperclip_copy(cls, social_site):
+    # def get_for_aSocial_site(cls, social_site):
+    #     '''
+    #         gets credentials for a given social site and returns them
+    #         '''
 
-    #     get_credentials = Credentials.get_for_aSocial_site(social_site)
-    #     return pyperclip.copy(get_credentials)
+    #     for credential in cls.credentials_list:
+    #         if credential in credential.social_site == social_site:
+    #             return credential
+
+    @classmethod
+    def pyperclip_copy(cls, social_site):
+
+        get_credentials = Credentials.get_for_aSocial_site(social_site)
+        return pyperclip.copy(get_credentials)
 
     def view_account(self, name):
         for account in self.credentials_list:

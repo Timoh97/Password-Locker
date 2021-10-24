@@ -19,18 +19,18 @@ class Credentials:
         # import pdb; pdb.set_trace()
         return password
 
-    @classmethod
-    def check_user(cls, first_name, last_name, password):
-        '''
-            Checks if the password and name exist in list_user
-            '''
-        current_user = ''
+    # @classmethod
+    # def check_user(cls, first_name, last_name, password):
+    #     '''
+    #         Checks if the password and name exist in list_user
+    #         '''
+    #     current_user = ''
 
-        for user in User.list_user:
-            if (user.first_name == first_name) and (user.first_name == last_name) and (user.password == password):
-                current_user = user.first_name
+    #     for user in User.list_user:
+    #         if (user.first_name == first_name) and (user.first_name == last_name) and (user.password == password):
+    #             current_user = user.first_name
 
-        return current_user
+    #     return current_user
 
     def __init__(self, social_site, username, password):
         '''

@@ -13,11 +13,11 @@ class Credentials:
     credentials_list = []
     user_credentials_list = []
 
-    # def generate_password(self, password_len=8):
-    #     random_str = ascii_letters + punctuation + digits
-    #     password = "".join(choice(random_str) for x in range(password_len))
-    #     # import pdb; pdb.set_trace()
-    #     return password
+    def generate_password(self, password_len=8):
+        random_str = ascii_letters + punctuation + digits
+        password = "".join(choice(random_str) for x in range(password_len))
+        # import pdb; pdb.set_trace()
+        return password
 
     @classmethod
     def check_user(cls, first_name, last_name, password):

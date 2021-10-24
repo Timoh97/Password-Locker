@@ -12,6 +12,15 @@ class Credentials:
 
     credentials_list = []
     user_credentials_list = []
+    
+    def __init__(self, social_site, username, password):
+        '''
+        initializes user properties to hold
+        '''
+        self.social_site = social_site
+        self.username = username
+        self.password = password
+
 
     def generate_password(self, password_len=8):
         random_str = ascii_letters + punctuation + digits
@@ -32,13 +41,6 @@ class Credentials:
 
         return current_user
 
-    def __init__(self, social_site, username, password):
-        '''
-            initializes user properties to hold
-            '''
-        self.social_site = social_site
-        self.username = username
-        self.password = password
 
     def save_credentials(self):
         '''

@@ -19,12 +19,12 @@ class test_user (unittest.TestCase):
     #     self.new_user.save_details()
     #     self.assertEqual(len(User.list_user),1)
 
-    # def test_delete(self):
-    #     self.new_user.save_details()
-    #     test_user=User("Kelvin","Kimani","00000")
-    #     test_user.save_details()
-    #     self.new_user.delete_details()
-    #     self.assertEqual(len(User.list_user),1)
+    def test_delete(self):
+        self.new_user.save_details()
+        test_user = User("Kelvin", "Kimani", "00000")
+        test_user.save_details()
+        self.new_user.delete_details()
+        self.assertEqual(len(User.list_user), 1)
 
     def test_multipleUser_saves(self):
         self.new_user.save_details()

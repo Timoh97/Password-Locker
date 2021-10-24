@@ -47,13 +47,13 @@ class Credentials:
 
         Credentials.credentials_list.append(self)
 
-    def delete_credentials(self, username):
-        '''
-            allows user to delete  credentials from credentials_list
-            '''
+    # def delete_credentials(self, username):
+    #     '''
+    #         allows user to delete  credentials from credentials_list
+    #         '''
 
-        self.credentials_list = [
-            x for x in self.credentials_list if x["username"] != username]
+    #     self.credentials_list = [
+    #         x for x in self.credentials_list if x["username"] != username]
 
     def display_credential(self):
         '''

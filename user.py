@@ -36,6 +36,8 @@ class User:
             User.list_user.remove(self)
             
     
+            
+    
         
         
              

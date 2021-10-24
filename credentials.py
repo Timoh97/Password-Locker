@@ -16,7 +16,7 @@ class Credentials:
     user_credentials_list = []
     
     def generate_password(self,password_len=8):
-        random_str = ascii_letters+punctuation+digits
+        random_str = ascii_letters + punctuation + digits
         password = "".join(choice(random_str) for x in range(password_len))
         # import pdb; pdb.set_trace()
         return password 

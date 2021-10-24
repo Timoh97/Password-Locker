@@ -1,5 +1,5 @@
-import unittest
-from user import User
+import unittest  #import unittest module
+from user import User #import user to make it accessible for testing
 
 
 class test_user (unittest.TestCase):

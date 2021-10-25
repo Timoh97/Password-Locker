@@ -1,44 +1,19 @@
 class User:
     
-    list_user = []
+    user_list = []
     
-    
-    def __init__ (self,first_name,last_name,password):
-        
-        """
-        initializes the user details
-        
-        """
-        
-        
-        self.first_name = first_name
-        self.last_name = last_name
+    def __init__(self,username,password):
+        self.username = username
         self.password = password
-         
-            
-    def save_details (self):
-            
-            """
-            save user details for the account
-            """
-       
-            User.list_user.append(self)
         
+    def save_user(self):
+        User.user_list.append(self)
         
-        
-         
-    def delete_details (self):
-            
-            """
-            function that helps delete user details
-            """
-             
-            User.list_user.remove(self)
-            
+    @classmethod
     
-            
-    
-        
-        
-             
-             
+    def user_exist(cls, username,password):
+        current_user = ''
+        for user in User.user_list:
+            if(user.username == username and user.password == password):
+                current_user = user.username
+        return current_user

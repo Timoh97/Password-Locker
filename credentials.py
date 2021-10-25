@@ -1,85 +1,49 @@
-from string import ascii_letters, punctuation, digits
-import pyperclip
-from secrets import choice
 import random
-from user import User
-
-
+import string
+import pyperclip
+        
 class Credentials:
-    '''
-        Class to create  account credentials, generate passwords and save their information
-        '''
-
-    credentials_list = []
-    user_credentials_list = []
     
-    def __init__(self, social_site, username, password):
-        '''
-        initializes user properties to hold
-        '''
-        self.social_site = social_site
+    credentials_list = []
+    
+    def __init__(self,account_name,username, password):
+        self.account_name = account_name
         self.username = username
         self.password = password
-
-
-    def generate_password(self, password_len=8):
-        random_str = ascii_letters + punctuation + digits
-        password = "".join(choice(random_str) for x in range(password_len))
-        # import pdb; pdb.set_trace()
-        return password
-
-    @classmethod
-    def check_user(cls, first_name, last_name, password):
-        '''
-            Checks if the password and name exist in list_user
-            '''
-        current_user = ''
-
-        for user in User.list_user:
-            if (user.first_name == first_name) and (user.first_name == last_name) and (user.password == password):
-                current_user = user.first_name
-
-        return current_user
-
-
+    
+    
     def save_credentials(self):
-        '''
-            save_credentials adds the credentials of a user to the credentials_list.
-            '''
-
         Credentials.credentials_list.append(self)
-
+        
     def delete_credentials(self):
-        '''
-            allows user to delete  credentials from credentials_list
-            '''
-
-        self.credentials_list = [
-            x for x in self.credentials_list if x["username"] != username]
-
-    def display_credential(self):
-        '''
-        display_credential this method that retuns the list of credential_list
-        '''
-        return self.credentials_list
-
+        Credentials.credentials_list.remove(self)
+        
     @classmethod
-    def get_for_aSocial_site(cls, social_site):
-        '''
-            gets credentials for a given social site and returns them
-            '''
-
-        for credential in cls.credentials_list:
-            if credential in credential.social_site == social_site:
-                return credential
-
+    
+    def find_account_name(cls,account_name):
+        for credentials in cls.credentials_list:
+            if credentials.account_name == account_name:
+                return credentials
+            
     @classmethod
-    def pyperclip_copy(cls, social_site):
-
-        get_credentials = Credentials.get_for_aSocial_site(social_site)
-        return pyperclip.copy(get_credentials)
-
-    def view_account(self, name):
-        for account in self.credentials_list:
-            if account['name'] == name:
-                return account
+    
+    def credentials_exist(cls, account_name):
+        for credentials in cls.credentials_list:
+            if credentials.account_name == account_name:
+                return True
+        return False
+    
+    @classmethod
+    
+    def display_credentials(cls):
+        return cls.credentials_list
+    
+    @classmethod
+    
+    def copy_credentials(cls):
+        found_credentials = Credentials.find_account_name(account_name)
+        pyperclip.copy(found_credentials)
+    
+    def generate_password(stringLength = 8):
+        password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "(|/~!.@,)#{?$[%]^}&*"
+        return ''.join(random.choice(password) for i in range(stringLength))

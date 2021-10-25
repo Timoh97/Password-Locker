@@ -1,85 +1,158 @@
-from user import User
 from credentials import Credentials
+from user import User
 
+def create_user(username, password):
+    new_user = User(username, password)
+    return new_user
+
+def sign_in(username, password):
+    user_exists = User.user_exist(username,password)
+    return user_exists
+
+def save_user(user):
+   user.save_user()
+
+def display_user():
+    return User.display_user()
+
+def create_credentials(account_name, username, password):
+     new_credentials = Credentials(account_name, username, password)
+     return new_credentials
+ 
+def save_credentials(credentials):
+     credentials.save_credentials()
+     
+def display_credentials():
+    return Credentials.display_credentials()
+
+def delete_credentials(credentials):
+    credentials.delete_credentials()
+    
+def check_credentials(account_name):
+    return Credentials.credentials_exist()
+
+def find_credentials(account_name):
+    return Credentials.find_account_name(account_name)
+
+def generate_password():
+    gen_pwrd = Credentials.generate_password()
+    return gen_pwrd
+
+def copy_credentials():
+    return Credentials.copy_credentials()
 
 def main():
-    print ("Hi mate! Welcome to password Locker. Enter your first_name")
-    first_name=input()
-    print("Enter your last_name")
-    last_name = input()
-    
-    
-    print("You are a step away from the locker, let's rock. Enter password")
-    password=input()
-    
-    print(f'Hello {first_name} {last_name} your password for this account is {password}')
-    
-    
-    print("press 1 to enter new password or 2 to generate password")
-    user_code =input()
-    
-    if user_code ==1:
-        password=input("Enter password: ")
-        confirm_pass=input("confirm password: ")
-        while password !=confirm_pass:
-            print("Does not match")
-            confirm_pass = input("Please, confirm password: ")
-    else:
-        password_len=int(input("Enter length of the password: "))
-        password=Credentials.generate_password(password_len)
-        print(f'The password is generated and it is {password}')
-        
-        
-    print("Congratulations this is password locker, for best password solutions")
-    print("\n")
-    
-    
-    account_user = User(first_name,last_name,password)
-    
-    while 1:
-        print("We use min codes for easy navigation:\n  cc-create account \n dsp-display credentials \n del- to delete the account \n ex-to exit")
-        
-        min_codes = input()
-        min_codes = min_codes.lower()
-        print("min code is",min_codes)
-        
-        if min_codes=="cc":
-          print("what account do you want to create e.g facebook")
-          Account_name =input()
-          print("Enter username")
-          username=input()
-          print("1.enter password\n2 Generated password")
-          user_in = int(input())
-          if user_in==1:
-              password=input ("Enter password:")
-          else:
-              password_len = int(input("Password length: "))
-              password =Credentials.generate_password(password_len)
-              print("The generated password is {password}")
-              Credentials.save_credentials(Account_name,username,password)
-        elif min_codes=="dsp":
-            if Credentials.display_credential()!=[]:
-                 print("Here are your account credentials")
-                 for credential in Credentials.display_credential():
-                     print("\n")
+    print("Hi mate,Welcome to password Locker. Let's rock")
+    print('Use the these commands to proceed: CC = create account, SI = sign in')
+    short_code = input().lower()   
+    if short_code == 'cc':
+        print('Enter new account details')
+        print('*' * 100)
+        username = input('Enter Username: ')
+        while True:
+            print('use : GP = to auto generate password... or MP = to manually enter your own password')
+            password_choice = input().lower()
+            if password_choice == 'mp':
+                password = input('Enter Password: ')
+                break
+            elif password_choice == 'gp':
+                password = generate_password()
+                break
             else:
-                print("such account doesn't exist! we are sorry.")
-                 
-        elif min_codes == "del":
-            while 1:
-                user_in = input('Enter Account name')
-                Credentials.delete_credentials(user_in)
-                print("Account deleted successfully!")
+                print('Invalid short code. Please try again')
                 
-        
-        elif min_codes =="ex":
-            account_user.logout()
-            print("Thank you for using my application")
+            save_user(create_user(username, password))
+                
+        print('*' * 100)
+        print(f'Welcome {username} to your new account your password is <--- {password} --->')
+        print('*' * 100)
+    
+    elif short_code == 'si':
+        print('Enter Account Username and Password to Login')
+        username = input('Username: ')
+        password = input('Password: ')
+        check_user = sign_in(username,password)
+        if sign_in == check_user:            
+            print(f'Welcome back {username}')
+            print('*' * 100)
+            
+            
+    while True:
+        print('Use these short codes to manage credentials: \n NC = new credential, \n VC = view credentials, \n SC = search credential, \n GP = generate random password, \n Dc = delete credential, \n CC = copy credential, \n EX = exit application')
+        short_code = input().lower()
+        if short_code == 'nc':
+            print('Enter New Credential Details')
+            print('*' * 100)
+            account_name = input('Account Name : ')
+            username = input('Username : ')
+            while True:
+                print('Would you like to... GP = auto generate password, or MP = manually enter password?')
+                password_choice = input().lower()
+                if password_choice == 'mp':
+                    password = input('Enter password : ')
+                    break
+                elif password_choice == 'gp':
+                    password = generate_password()
+                    break
+                else:
+                    print('Invalid short code. Please try again')
+                print('*' * 100)
+            save_credentials(create_credentials(account_name, username, password))
+            print('*' * 100)
+            print(f'Your {account_name} account has been saved')
+            print('*' * 100)
+            
+        elif short_code == 'vc':
+            if display_credentials():
+                print('Your saved credentials are:')
+                for account_name in display_credentials():
+                    print('*' * 100)
+                    print(f' Name: {account_name} \n Username: {username} \n Password: {password}')
+                    print('*' * 100)
+            else:
+                print('*' * 100)
+                print('You have No Credentials. Please Create One')
+                print('*' * 100)
+                
+        elif short_code == 'dc':
+            print('Enter Account name to delete...')
+            name = input('Acount Name : ')
+            print('*' * 100)
+            if find_credentials(name):
+                name_result = find_credentials(name)
+                name_result.delete_credentials()
+                print(f'Account {name} has been successfully deleted ')
+                print('*' * 100)
+                
+            else:
+                print('Incorrect account name')
+                print('*' * 100)
+                
+        elif short_code == 'sc':
+            print('Enter Account Name To Search...')
+            search = input('Account Name : ')
+            print('*' * 100)
+            if find_credentials(search):
+                search = find_credentials(search)
+                print(f'Account Name: {search.account_name} \n Username: {search.username} \n Password: {search.password}')
+                print('*' * 100)
+            else:
+                print('Credential does not exist')
+                print('*' * 100)
+            
+        elif short_code == 'gp':
+            password = generate_password()
+            print(f'Your generated password is: <--- {password} --->')
+            print('*' * 100)
+            
+        elif short_code == 'ex':
+            print('Goodbye')
+            print('*' * 100)
+            break
+            
         else:
-            print("Invalid min codes. Use valid codes\n cc-to create account \n dsp-to display account details \n ex-to exit \n and del-to delete account")
-        
-        
-        
-        
+            print('Invalid Short code. Please try again!')
+            print('*' * 100)
+
 if __name__ == '__main__':
     main()

@@ -1,6 +1,6 @@
 from string import ascii_letters, punctuation, digits
-# import pyperclip
-# from secrets import choice
+import pyperclip
+from secrets import choice
 import random
 from user import User
 

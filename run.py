@@ -12,20 +12,20 @@ def main():
     print("You are a step away from the locker, let's rock. Enter password")
     password=input()
     
-    print(f'your first name is {first_name} and password for this account is {password}')
+    print(f'Hello {first_name} {last_name} your password for this account is {password}')
     
     
     print("press 1 to enter new password or 2 to generate password")
     user_code =input()
     
     if user_code ==1:
-        password=input("Enter password:")
-        confirm_pass=input("confirm password:")
+        password=input("Enter password: ")
+        confirm_pass=input("confirm password: ")
         while password !=confirm_pass:
             print("Does not match")
             confirm_pass = input("Please, confirm password: ")
     else:
-        password_len=int(input("Enter length of the password"))
+        password_len=int(input("Enter length of the password: "))
         password=Credentials.generate_password(password_len)
         print(f'The password is generated and it is {password}')
         
@@ -39,7 +39,8 @@ def main():
     while 1:
         print("We use min codes for easy navigation:\n  cc-create account \n dsp-display credentials \n del- to delete the account \n ex-to exit")
         
-        min_codes = input().lower()
+        min_codes = input()
+        min_codes = min_codes.lower()
         print("min code is",min_codes)
         
         if min_codes=="cc":
@@ -53,13 +54,13 @@ def main():
               password=input ("Enter password:")
           else:
               password_len = int(input("Password length: "))
-              password =account_user.generate_password(password_len)
+              password =Credentials.generate_password(password_len)
               print("The generated password is {password}")
-              account_user.save_credentials(Account_name,username,password)
+              Credentials.save_credentials(Account_name,username,password)
         elif min_codes=="dsp":
-            if account_user.display_credential()!=[]:
+            if Credentials.display_credential()!=[]:
                  print("Here are your account credentials")
-                 for account in account_user.display_credential():
+                 for credential in Credentials.display_credential():
                      print("\n")
             else:
                 print("such account doesn't exist! we are sorry.")
@@ -67,7 +68,7 @@ def main():
         elif min_codes == "del":
             while 1:
                 user_in = input('Enter Account name')
-                account_user.delete_credentials(user_in)
+                Credentials.delete_credentials(user_in)
                 print("Account deleted successfully!")
                 
         

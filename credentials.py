@@ -49,7 +49,7 @@ class Credentials:
 
         Credentials.credentials_list.append(self)
 
-    def delete_credentials(self, username):
+    def delete_credentials(self):
         '''
             allows user to delete  credentials from credentials_list
             '''

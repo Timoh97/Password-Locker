@@ -30,9 +30,9 @@ class test_credentials (unittest.TestCase):
         
         
         
-    # def test_display_credentials(self):
-    #     self.new_credentials_list()
-    #     self.assertEqual(len(Credentials.credentials_list),1)
+    def test_display_credentials(self):
+        self.new_credentials_list()
+        self.assertEqual(len(Credentials.credentials_list),1)
         
         
     
